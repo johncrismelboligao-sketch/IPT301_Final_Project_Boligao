@@ -34,7 +34,7 @@ class StudentController extends Controller
                 });
             })
             ->orderBy('last_name')
-            ->paginate(10)
+            ->paginate(5)
             ->withQueryString();
 
         return view('students.index', compact('students'));

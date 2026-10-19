@@ -53,6 +53,6 @@
     </div>
 
     <div class="mt-3">
-        {{ $subjects->links() }}
+        {{ $subjects->links('pagination::bootstrap-5') }}
     </div>
 @endsection

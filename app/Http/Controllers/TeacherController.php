@@ -30,7 +30,7 @@ class TeacherController extends Controller
                 });
             })
             ->orderBy('last_name')
-            ->paginate(10)
+            ->paginate(5)
             ->withQueryString();
 
         return view('teachers.index', compact('teachers'));

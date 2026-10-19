@@ -38,7 +38,7 @@ class SchoolClassController extends Controller
                 });
             })
             ->orderBy('name')
-            ->paginate(10)
+            ->paginate(5)
             ->withQueryString();
 
         return view('classes.index', compact('classes'));
