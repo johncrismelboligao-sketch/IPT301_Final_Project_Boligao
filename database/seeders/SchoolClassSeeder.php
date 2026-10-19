@@ -12,14 +12,12 @@ class SchoolClassSeeder extends Seeder
     {
         $teachers = Teacher::all();
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             $grade = 7 + $i;
 
-            SchoolClass::factory()->create([
+            SchoolClass::query()->updateOrCreate(['grade_level' => $grade, 'section' => 'A', 'school_year' => '2026-2027'], [
                 'name' => "Grade {$grade} - A",
                 'grade_level' => $grade,
-                'section' => 'A',
-                'school_year' => '2026-2027',
                 'teacher_id' => $teachers->random()->id,
             ]);
         }

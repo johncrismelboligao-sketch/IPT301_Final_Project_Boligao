@@ -6,6 +6,7 @@ A Laravel application for managing students, classes, subjects, teachers, and da
 
 - PHP 8.2 or later
 - Composer
+- MySQL 8.0 or later (or a compatible MariaDB server)
 
 ## Run locally (Windows PowerShell)
 
@@ -13,11 +14,12 @@ A Laravel application for managing students, classes, subjects, teachers, and da
 composer install
 Copy-Item .env.example .env
 php artisan key:generate
-php artisan migrate:fresh --seed
+mysql -u root -p -e "CREATE DATABASE school_attendance CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+php artisan migrate --seed
 php artisan serve --port=8001
 ```
 
-Open <http://127.0.0.1:8001>. The app uses SQLite by default; Laravel creates `database/database.sqlite` when migrations run. The seeded data includes eight teacher records (using the requested names), six classes, four students (John Crismel Boligao, Axl Montuya, Klint Taylaran, and MAtt Omus), eight subjects, and attendance records for the recent weekdays.
+Before running migrations, make sure MySQL is running and update `DB_USERNAME` and `DB_PASSWORD` in `.env` to match your local MySQL account. The default database name is `school_attendance`; create it with the command above or change `DB_DATABASE` to an existing database. Open <http://127.0.0.1:8001> after the server starts. The seeded data includes eight teacher records (using the requested names), six classes, four students (John Crismel Boligao, Axl Montuya, Klint Taylaran, and MAtt Omus), eight subjects, and attendance records for the recent weekdays.
 
 > `migrate:fresh` drops all existing tables and data. Use it only when you intend to reset the local database.
 

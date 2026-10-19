@@ -6,6 +6,7 @@ use App\Models\SchoolClass;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class StudentController extends Controller
 {
@@ -46,9 +47,35 @@ class StudentController extends Controller
         return view('students.create', compact('classes'));
     }
 
+    private function ensureUniqueFullName(Request $request, ?Student $student = null): void
+    {
+        $firstName = trim((string) $request->input('first_name', ''));
+        $lastName = trim((string) $request->input('last_name', ''));
+
+        if ($firstName === '' || $lastName === '') {
+            return;
+        }
+
+        $duplicateExists = Student::query()
+            ->whereRaw('LOWER(first_name) = ?', [mb_strtolower($firstName)])
+            ->whereRaw('LOWER(last_name) = ?', [mb_strtolower($lastName)])
+            ->when($student, fn ($query) => $query->whereKeyNot($student->getKey()))
+            ->exists();
+
+        if ($duplicateExists) {
+            throw ValidationException::withMessages([
+                'first_name' => ['A student with this full name already exists.'],
+                'last_name' => ['A student with this full name already exists.'],
+            ]);
+        }
+    }
+
     public function store(Request $request)
     {
-        Student::create($request->validate($this->rules()));
+        $validated = $request->validate($this->rules());
+        $this->ensureUniqueFullName($request, null);
+
+        Student::create($validated);
 
         return redirect()->route('students.index')->with('success', 'Student added successfully.');
     }
@@ -74,7 +101,10 @@ class StudentController extends Controller
 
     public function update(Request $request, Student $student)
     {
-        $student->update($request->validate($this->rules($student)));
+        $validated = $request->validate($this->rules($student));
+        $this->ensureUniqueFullName($request, $student);
+
+        $student->update($validated);
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully.');
     }

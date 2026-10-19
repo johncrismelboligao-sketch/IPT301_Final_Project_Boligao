@@ -10,21 +10,27 @@ class SubjectSeeder extends Seeder
     public function run(): void
     {
         $subjects = [
-            ['MATH-101', 'Mathematics'],
-            ['ENG-101', 'English'],
-            ['SCI-101', 'Science'],
-            ['FIL-101', 'Filipino'],
-            ['AP-101', 'Araling Panlipunan'],
-            ['MAPEH-101', 'MAPEH'],
-            ['TLE-101', 'Technology and Livelihood Education'],
-            ['ESP-101', 'Values Education'],
+            ['IPT 301', 'Integrative Programming & Technologies 1'],
+            ['NET 301', 'Networking 2'],
+            ['IM 301', 'Information Management 2'],
+            ['WS 301', 'Web Systems & Technologies'],
+            ['DC 301', 'Domain Course 3'],
+            ['DC 302', 'Domain Course 4'],
+            ['CC 302', 'Applications Development & Emerging Technologies'],
+            ['GE ELEC 02', 'Philippine Indigenous Community'],
         ];
 
-        foreach ($subjects as [$code, $name]) {
-            Subject::factory()->create([
+        // Update existing rows by their stable order so attendance records keep
+        // pointing to the same subjects when the catalog is renamed.
+        $existingSubjects = Subject::query()->orderBy('id')->get();
+
+        foreach ($subjects as $index => [$code, $name]) {
+            $subject = $existingSubjects->get($index) ?? new Subject();
+            $subject->fill([
                 'code' => $code,
                 'name' => $name,
             ]);
+            $subject->save();
         }
     }
 }

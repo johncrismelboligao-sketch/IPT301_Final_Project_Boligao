@@ -15,7 +15,11 @@ class StudentSeeder extends Seeder
             ['John Crismel', 'Boligao', 'john.boligao@student.test'],
             ['Axl', 'Montuya', 'axl.montuya@student.test'],
             ['Klint', 'Taylaran', 'klint.taylaran@student.test'],
-            ['MAtt', 'Omus', 'matt.omus@student.test'],
+            ['Matt', 'Omus', 'matt.omus@student.test'],
+            ['Jasmin', 'Omus', 'jasmin.omus@student.test'],
+            ['John Sarge', 'Andamon', 'johnsarge.andamon@student.test'],
+            ['Paya', 'Corsiga', 'paya.corsiga@student.test'],
+            ['Jhon Mark', 'Orongan', 'jhonmark.orongan@student.test'],
         ];
 
         $classes = SchoolClass::query()->orderBy('id')->take(count($students))->get();
