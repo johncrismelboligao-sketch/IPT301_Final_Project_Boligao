@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Dashboard') | School Attendance Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ route('dashboard') }}">School Attendance</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+        <div class="container app-container">
+            <a class="navbar-brand app-brand" href="{{ route('dashboard') }}">
+                <span>School Attendance</span>
+                <small>Management System</small>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto app-nav-links">
                     @foreach([
                         'dashboard' => ['Dashboard', 'dashboard'],
                         'students.index' => ['Students', 'students.*'],
@@ -24,7 +28,7 @@
                         'attendance.index' => ['Attendance', 'attendance.*'],
                     ] as $route => [$label, $pattern])
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs($pattern) ? 'active fw-semibold' : '' }}" href="{{ route($route) }}">{{ $label }}</a>
+                            <a class="nav-link {{ request()->routeIs($pattern) ? 'active' : '' }}" href="{{ route($route) }}">{{ $label }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -32,7 +36,7 @@
         </div>
     </nav>
 
-    <main class="container pb-5">
+    <main class="container app-container app-main">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show">
                 {{ session('success') }}
@@ -62,5 +66,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 </html>
