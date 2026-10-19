@@ -12,7 +12,7 @@
         @csrf
         <div class="row g-3">
             @include('partials.field', ['name' => 'name', 'label' => 'Class Name'])
-            @include('partials.field', ['name' => 'grade_level', 'label' => 'Grade Level', 'type' => 'number', 'max' => 12])
+            @include('partials.field', ['name' => 'grade_level', 'label' => 'Year Level (1–4)', 'type' => 'number', 'min' => 1, 'max' => 4])
             @include('partials.field', ['name' => 'section', 'label' => 'Section'])
             @include('partials.field', ['name' => 'school_year', 'label' => 'School Year', 'value' => '2026-2027'])
             @include('partials.select', ['name' => 'teacher_id', 'label' => 'Adviser', 'options' => $teachers->pluck('full_name', 'id')->toArray()])

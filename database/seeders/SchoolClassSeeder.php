@@ -11,15 +11,28 @@ class SchoolClassSeeder extends Seeder
     public function run(): void
     {
         $teachers = Teacher::all();
+        $existingClasses = SchoolClass::query()->orderBy('id')->get();
+        $index = 0;
 
-        for ($i = 0; $i < 8; $i++) {
-            $grade = 7 + $i;
+        foreach ([1, 2, 3, 4] as $yearLevel) {
+            $yearName = match ($yearLevel) {
+                1 => '1st Year',
+                2 => '2nd Year',
+                3 => '3rd Year',
+                default => '4th Year',
+            };
 
-            SchoolClass::query()->updateOrCreate(['grade_level' => $grade, 'section' => 'A', 'school_year' => '2026-2027'], [
-                'name' => "Grade {$grade} - A",
-                'grade_level' => $grade,
-                'teacher_id' => $teachers->random()->id,
-            ]);
+            foreach (['A', 'B'] as $section) {
+                $schoolClass = $existingClasses->get($index) ?? new SchoolClass();
+                $schoolClass->fill([
+                    'name' => "{$yearName} - {$section}",
+                    'grade_level' => $yearLevel,
+                    'section' => $section,
+                    'school_year' => '2026-2027',
+                    'teacher_id' => $teachers->random()->id,
+                ])->save();
+                $index++;
+            }
         }
     }
 }

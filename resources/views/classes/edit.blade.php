@@ -13,7 +13,7 @@
         @method('PUT')
         <div class="row g-3">
             @include('partials.field', ['name' => 'name', 'label' => 'Class Name', 'value' => $schoolClass->name])
-            @include('partials.field', ['name' => 'grade_level', 'label' => 'Grade Level', 'type' => 'number', 'value' => $schoolClass->grade_level])
+            @include('partials.field', ['name' => 'grade_level', 'label' => 'Year Level (1–4)', 'type' => 'number', 'min' => 1, 'max' => 4, 'value' => $schoolClass->grade_level])
             @include('partials.field', ['name' => 'section', 'label' => 'Section', 'value' => $schoolClass->section])
             @include('partials.field', ['name' => 'school_year', 'label' => 'School Year', 'value' => $schoolClass->school_year])
             @include('partials.select', ['name' => 'teacher_id', 'label' => 'Adviser', 'value' => $schoolClass->teacher_id, 'options' => $teachers->pluck('full_name', 'id')->toArray()])

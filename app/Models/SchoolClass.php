@@ -24,4 +24,15 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Student::class, 'class_id');
     }
+
+    public function getYearLevelLabelAttribute(): string
+    {
+        return match ((int) $this->grade_level) {
+            1 => '1st Year',
+            2 => '2nd Year',
+            3 => '3rd Year',
+            4 => '4th Year',
+            default => "Year {$this->grade_level}",
+        };
+    }
 }

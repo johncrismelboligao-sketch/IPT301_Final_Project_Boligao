@@ -13,7 +13,7 @@ class SchoolClassController extends Controller
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'grade_level' => ['required', 'integer', 'between:1,12'],
+            'grade_level' => ['required', 'integer', 'between:1,4'],
             'section' => [
                 'required', 'string', 'max:50',
                 Rule::unique('classes')

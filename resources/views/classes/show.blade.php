@@ -13,7 +13,7 @@
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-body row g-3">
-            <div class="col-md-3"><strong>Grade Level</strong><div>{{ $schoolClass->grade_level }}</div></div>
+            <div class="col-md-3"><strong>Year Level</strong><div>{{ $schoolClass->year_level_label }}</div></div>
             <div class="col-md-3"><strong>Section</strong><div>{{ $schoolClass->section }}</div></div>
             <div class="col-md-3"><strong>School Year</strong><div>{{ $schoolClass->school_year }}</div></div>
             <div class="col-md-3"><strong>Adviser</strong><div>{{ $schoolClass->teacher?->full_name ?? '—' }}</div></div>

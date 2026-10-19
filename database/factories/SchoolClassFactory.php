@@ -9,12 +9,18 @@ class SchoolClassFactory extends Factory
 {
     public function definition(): array
     {
-        $grade = fake()->numberBetween(7, 12);
+        $yearLevel = fake()->numberBetween(1, 4);
         $section = fake()->bothify('A#');
+        $yearName = match ($yearLevel) {
+            1 => '1st Year',
+            2 => '2nd Year',
+            3 => '3rd Year',
+            default => '4th Year',
+        };
 
         return [
-            'name' => "Grade {$grade} - {$section}",
-            'grade_level' => $grade,
+            'name' => "{$yearName} - {$section}",
+            'grade_level' => $yearLevel,
             'section' => $section,
             'school_year' => '2026-2027',
             'teacher_id' => Teacher::factory(),

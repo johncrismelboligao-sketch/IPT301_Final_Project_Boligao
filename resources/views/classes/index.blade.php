@@ -23,7 +23,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Grade</th>
+                        <th>Year Level</th>
                         <th>Section</th>
                         <th>School Year</th>
                         <th>Adviser</th>
@@ -34,7 +34,7 @@
                     @forelse ($classes as $class)
                         <tr>
                             <td>{{ $class->name }}</td>
-                            <td>{{ $class->grade_level }}</td>
+                            <td>{{ $class->year_level_label }}</td>
                             <td>{{ $class->section }}</td>
                             <td>{{ $class->school_year }}</td>
                             <td>{{ $class->teacher?->full_name ?? '—' }}</td>
