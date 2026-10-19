@@ -11,7 +11,7 @@
     <form action="{{ route('students.store') }}" method="POST" class="card shadow-sm border-0 p-4">
         @csrf
         <div class="row g-3">
-            @include('partials.field', ['name' => 'student_no', 'label' => 'Student Number'])
+            @include('partials.field', ['name' => 'student_no', 'label' => 'Student Number (5 digits)', 'maxlength' => 5, 'pattern' => '[0-9]{5}'])
             @include('partials.field', ['name' => 'first_name', 'label' => 'First Name'])
             @include('partials.field', ['name' => 'last_name', 'label' => 'Last Name'])
             @include('partials.select', ['name' => 'gender', 'label' => 'Gender', 'options' => ['Male' => 'Male', 'Female' => 'Female']])

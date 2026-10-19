@@ -10,7 +10,7 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'student_no' => '2026-' . fake()->unique()->numerify('#####'),
+            'student_no' => fake()->unique()->numerify('#####'),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'gender' => fake()->randomElement(['Male', 'Female']),

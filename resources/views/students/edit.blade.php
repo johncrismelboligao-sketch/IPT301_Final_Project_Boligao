@@ -12,7 +12,7 @@
         @csrf
         @method('PUT')
         <div class="row g-3">
-            @include('partials.field', ['name' => 'student_no', 'label' => 'Student Number', 'value' => $student->student_no])
+            @include('partials.field', ['name' => 'student_no', 'label' => 'Student Number (5 digits)', 'value' => $student->student_no, 'maxlength' => 5, 'pattern' => '[0-9]{5}'])
             @include('partials.field', ['name' => 'first_name', 'label' => 'First Name', 'value' => $student->first_name])
             @include('partials.field', ['name' => 'last_name', 'label' => 'Last Name', 'value' => $student->last_name])
             @include('partials.select', ['name' => 'gender', 'label' => 'Gender', 'value' => $student->gender, 'options' => ['Male' => 'Male', 'Female' => 'Female']])

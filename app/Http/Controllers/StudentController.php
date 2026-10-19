@@ -13,7 +13,7 @@ class StudentController extends Controller
     private function rules(?Student $student = null): array
     {
         return [
-            'student_no' => ['required', 'string', 'max:20', Rule::unique('students')->ignore($student)],
+            'student_no' => ['required', 'regex:/^\d{5}$/', Rule::unique('students')->ignore($student)],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', Rule::in(['Male', 'Female'])],

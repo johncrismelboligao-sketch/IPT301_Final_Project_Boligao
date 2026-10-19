@@ -29,8 +29,8 @@ class StudentSeeder extends Seeder
         }
 
         foreach ($students as $index => [$firstName, $lastName, $email]) {
-            $studentNo = sprintf('2026-%05d', $index + 1);
-            $student = Student::query()->firstOrNew(['student_no' => $studentNo]);
+            $studentNo = sprintf('%05d', $index + 1);
+            $student = Student::query()->firstOrNew(['email' => $email]);
 
             if (! $student->exists) {
                 $student = Student::factory()->make([
@@ -40,6 +40,7 @@ class StudentSeeder extends Seeder
             }
 
             $student->fill([
+                'student_no' => $studentNo,
                 'first_name' => $firstName,
                 'last_name' => $lastName,
                 'email' => $email,
